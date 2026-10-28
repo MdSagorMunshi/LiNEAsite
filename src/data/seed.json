@@ -1,0 +1,297 @@
+{
+  "snapshotAt": "2026-10-28T20:35:32.381Z",
+  "source": "build-time-snapshot",
+  "repo": {
+    "stars": 1,
+    "forks": 0,
+    "watchers": 0,
+    "openIssues": 0,
+    "description": "Sovereign, privacy-first cellular dialer and phone app for Android. 100% on-device, zero trackers, and zero cloud dependency.",
+    "license": "Apache-2.0",
+    "language": "Kotlin",
+    "htmlUrl": "https://github.com/MdSagorMunshi/Linea"
+  },
+  "releases": [
+    {
+      "tagName": "v2.7.0",
+      "name": "LiNEA v2.7.0 — Crystal Design & Easter Egg",
+      "publishedAt": "2026-10-28T19:53:45Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.7.0",
+      "body": "# 🚀 LiNEA v2.7.0 — Release Notes\n\n## Overview\n**LiNEA v2.7.0** introduces the **Crystal Design System** — an optional, switchable liquid-glass aesthetic featuring live background refraction, dimensional surfaces, and fluid spring physics — alongside an instant **Call Button Easter Egg**, streamlined long-press actions, elevation of the platform baseline to **Android 13 (API 33)**, and complete resolution of 15 Android Telecom and telephony lint issues.\n\n---\n\n### What's New in v2.7.0\n\n#### 💎 Crystal Design System (Liquid-Glass Aesthetic)\n- **Selectable Design Theme**: Switch seamlessly between **Classic** (Tactile Neumorphism) and **Crystal** (Liquid Glass) under **Settings → Appearance → Design**. The saved design is independent of Light, Dark, OLED, and System color modes.\n- **Live GPU Glass Renderer**: Built on AGSL (`RuntimeShader`) for Android 13+ and GPU `GraphicsLayer` backdrop capture (`CrystalBackdropCapture`), dynamically displacing source pixels using signed distance and edge normal math with specular highlights and `RenderEffect` backdrop blur. No heavy third-party rendering dependencies, screenshot readbacks, or idle animation loops.\n- **Full-Screen Cohesive UI**:\n  - **Crystal Dialpad**: Stable glass keypad with responsive tactile compression and tilt physics on keypress (`CrystalDialpadLayout`, `CrystalCallButton`), with a scrollable upper region for suggestions and setup banners on compact viewports.\n  - **Floating Glass Dock**: Frosted glass navigation bar (`CrystalNavBar`) with live background refraction, diffusing content scrolling beneath it with a spring-animated tab lens.\n  - **Contacts & Profiles**: Portrait-focused favorites strip, expanded contact cards, and alphabet scrubber rail with proper dock clearance.\n  - **In-Call & Incoming Screens**: Dynamic `CallScene` sampling the caller's poster, crisp action typography, and contrasting foregrounds across all color modes.\n  - **Optics Modes**: Configurable optics profiles (`Performance`, `Balanced`, `Full Optics`) to tailor GPU refraction effects to device hardware capabilities.\n\n#### 🔮 Call Button Easter Egg\n- **Instant Alternate Skin Reveal**: Press and hold the call button on the dialpad to reveal its alternate skin in a single intuitive gesture with tactile spring feedback, without invoking an accidental outgoing call.\n\n---\n\n### Key Improvements & Fixes in v2.7.0\n\n#### ⚡ Telecom, Telephony & Platform Quality\n- **Streamlined Dialpad Interactions**: Removed legacy orbital speed dial options when pressing and holding the call button, dedicating the gesture to the easter egg. Standard number-key speed dial (press and hold 1–9) and \"hold 0 for +\" remain fully functional.\n- **Android 13 Baseline**: Raised the minimum supported platform version to **Android 13 (API 33)**, targeting **Android 17 (API 37)**, enabling native AGSL runtime shaders, per-app language settings, and modern Telecom security APIs.\n- **Zero Android Lint Issues**: Resolved all 15 previously reported Android lint warnings and errors across Telecom authorization checks, subscription access, window key event dispatch (`CallKeyEventInterceptor`), notification permission guards (`CallNotificationManager`), and telephony hardware declarations (`android.hardware.telephony` marked optional for tablet and Wi-Fi device compatibility).\n\n---\n\n### Release Metadata\n- **versionCode**: `12`\n- **versionName**: `2.7.0`\n- **Min SDK**: `Android 13 (API 33)`\n- **Target SDK**: `Android 17 (API 37)`\n\n---\n\n### Assets\n| Asset Name | SHA-256 Digest | Size |\n|---|---|---|\n| `LiNEA-v2.7.0-release.apk` | `480b2970339c0dcd698c3816792ff925ce2098f57dcee2654dab92447394bd7b` | 30.00 MiB |\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.7.0-release.apk",
+          "label": null,
+          "size": 31461489,
+          "sizeLabel": "30.0 MB",
+          "downloadCount": 0,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.7.0/LiNEA-v2.7.0-release.apk",
+          "sha256": "480b2970339c0dcd698c3816792ff925ce2098f57dcee2654dab92447394bd7b",
+          "updatedAt": "2026-10-28T19:53:44Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.6.1",
+      "name": "LiNEA v2.6.1 — Dual-SIM Identification & Telephony Resolution",
+      "publishedAt": "2026-10-19T10:18:44Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.6.1",
+      "body": "# 🚀 LiNEA v2.6.1 — Release Notes\n\n## Overview\n**LiNEA v2.6.1** delivers critical correctness fixes for **Dual-SIM Identification & Telephony Resolution**, implementing a deterministic 5-tier resolution chain across Android's Telecom framework, eradicating phantom SIM 2 fallbacks, enforcing single-SIM UI cleanliness, and ensuring seamless call log synchronization.\n\n---\n\n### Key Fixes & Optimizations in v2.6.1\n\n#### 📶 Dual-SIM Identification & Telephony Resolution Chain\n- **Deterministic SIM Slot Resolution**: Implemented a robust 5-tier resolution chain in `SimAccountResolver` mapping `Call` / `CallLog` → `PhoneAccountHandle` → `SubscriptionInfo` → physical/logical 0-based SIM slot index (`0` for SIM 1, `1` for SIM 2) → display label. Replaced fragile default-SIM assumptions, arbitrary ID sorting, and last-dialed guesswork with verified subscription mappings.\n- **Elimination of Speculative Fallbacks & Phantom SIM 2**: Completely eradicated speculative `callCapablePhoneAccounts` fallback loops that erroneously synthesized phantom \"SIM 2\" indicators on single-SIM devices and emulators. Active multi-SIM detection is now strictly bound to hardware-verified `SubscriptionManager.activeSubscriptionInfoList`.\n- **Clean Single-SIM Interface Degradation**: Enforced a zero-clutter rule for single-SIM devices across the entire UI. SIM selector pills, badges, and labels are fully hidden across the dialpad, recent calls history, call detail sheets, incoming call overlay, active call screen, and missed call notifications when only one SIM is present.\n- **Persistent In-Call SIM Indicators**: Added spring-animated glassmorphic SIM indicator pills (\"SIM 1\" / \"SIM 2\") under caller identity during incoming calls, outgoing dialing, and connected calls. The indicator cleanly persists across in-call state changes including Hold, Mute, Speakerphone, and Bluetooth routing without shifting action controls.\n- **System Call Log & Historical Record Attribution**: Enhanced `CallLogRepository` to query system `PHONE_ACCOUNT_ID` and `PHONE_ACCOUNT_COMPONENT_NAME`. Integrated multi-tier fallback parsing to resolve historical calls and OEM-specific call log account handles (matching ICCID substrings and numeric subscription IDs).\n- **Dynamic Subscription & Hot-Swap Monitoring**: Integrated `SubscriptionManager.OnSubscriptionsChangedListener` and `ACTION_SIM_STATE_CHANGED` broadcast receivers to instantly update multi-SIM state, active slots, and UI visibility when physical SIMs or eSIM profiles are added, removed, or toggled at runtime.\n- **Missed Call Notification Attribution**: Formatted missed call notifications with `\" • SIM X\"` attribution badges exclusively on dual-SIM devices, preventing notification clutter on single-SIM setups.\n- **Unit Test Coverage**: Added comprehensive test suite in `SimAccountResolverTest` verifying slot index resolution, single-SIM hiding, dual-SIM attribution, eSIM + physical SIM setups, call log ICCID/subId parsing, emergency calls, and hot swaps.\n\n---\n\n### Release Metadata\n- **versionCode**: `11`\n- **versionName**: `2.6.1`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n\n---\n\n### Assets\n| Asset Name | SHA-256 Digest | Size |\n|---|---|---|\n| `LiNEA-v2.6.1-release.apk` | `0872a677e831eab4ec7003bd60abd024d0fb823322de45b802228081690c79e3` | 30.11 MiB |\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.6.1-release.apk",
+          "label": null,
+          "size": 31573613,
+          "sizeLabel": "30.1 MB",
+          "downloadCount": 7,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.6.1/LiNEA-v2.6.1-release.apk",
+          "sha256": "0872a677e831eab4ec7003bd60abd024d0fb823322de45b802228081690c79e3",
+          "updatedAt": "2026-10-19T10:18:44Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.6.0",
+      "name": "LiNEA v2.6.0",
+      "publishedAt": "2026-10-18T20:54:31Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.6.0",
+      "body": "# 🚀 LiNEA v2.6.0 — Release Notes\n\n## Overview\n**LiNEA v2.6.0** introduces the **Navbar Customization System** — allowing full visual, dimensional, and animation control over the bottom navigation bar — alongside critical **Incoming Call Ringtone Resilience** enhancements, AAC-LC asset transcoding, and extended Telecom startup grace periods.\n\n---\n\n### What's New in v2.6.0\n\n#### 🧭 Navbar Customization System\n- **Style Selector**: Choose between:\n  - **Floating Circle (Default)**: A minimalist, floating circular glass button with 1-tap expansion, 5-second automatic collapse, and direct 4-way gesture flick navigation.\n  - **Expanded Pill Bar**: A persistent, full-width frosted glass pill bar with instant direct one-tap tab switches.\n- **Dynamic Circle Sizing**: Customize the physical diameter and thumb touch footprint of the collapsed floating button across 4 distinct sizes:\n  - **Compact**: `48 dp` (minimal visual footprint, ideal for small screens).\n  - **Standard**: `56 dp` (default balanced ergonomic sizing).\n  - **Comfortable**: `64 dp` (generous touch targets for easy reach).\n  - **Large**: `72 dp` (maximum accessibility and thumb reachability).\n- **Animation & Motion Dynamics**: Configure morphing and stretch spring dynamics with selectable physics profiles:\n  - **Bouncy Spring (Default)**: Playful spring bounce with high damping ratio.\n  - **Smooth Fluid**: Silky smooth motion with low stiffness and critical damping.\n  - **Snappy Quick**: High-stiffness instant transitions with minimal bounce.\n  - **Minimal Fade**: Clean, subtle crossfades for low-distraction navigation.\n- **Interactive Live Sandbox**: An embedded live preview inside Settings allowing users to interact with, expand, and flick the actual navbar while tweaking styles, sizes, and physics in real time.\n- **Gesture Quick-Reference Guide**: Interactive visual guide detailing Tap expansion, 4-Way Gesture Flick (jump directly to tabs without expanding), and Triple-Tap persistence toggle.\n- **Settings Integration & Search Engine**: Dedicated entry under **Appearance & Motion** with dynamic status subtitles, mode badges, and instant discovery via the Settings search engine.\n\n---\n\n### Key Fixes & Optimizations in v2.6.0\n\n#### 🔊 Ringtone Resilience & Codec Transcoding\n- **Standard AAC-LC Transcoding**: Re-encoded embedded ringtones (`ring_glass.m4a`, `ring_minimal.m4a`) to standard AAC-LC / 44.1kHz stereo format, eliminating playback stalls and decoding failures on strict hardware media decoders.\n- **3-Tier Ringer Fallback Chain**: Built resilient fallback architecture in `IncomingCallActivity` attempting custom raw resource &rarr; system ringtone URI stream &rarr; default notification alert sound, guaranteeing an incoming call is never silent even if a custom sound resource fails to load.\n- **Telecom Silence Grace Period Extension**: Extended startup silence grace period from 600ms to 2000ms upon initial Telecom connection to eliminate ringer startup race conditions and prevent spurious volume key events from silencing the incoming call ringtone.\n\n---\n\n### Release Metadata\n- **versionCode**: `10`\n- **versionName**: `2.6.0`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n\n---\n\n### Assets\n| Asset Name | SHA-256 Digest | Size |\n|---|---|---|\n| `LiNEA-v2.6.0-release.apk` | `314acccb4f82ef64ee2378d80c9efdb776454c86ae2d0e39f6c818e79c3c1958` | 30.08 MiB |\n\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.6.0-release.apk",
+          "label": null,
+          "size": 31540845,
+          "sizeLabel": "30.1 MB",
+          "downloadCount": 3,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.6.0/LiNEA-v2.6.0-release.apk",
+          "sha256": "314acccb4f82ef64ee2378d80c9efdb776454c86ae2d0e39f6c818e79c3c1958",
+          "updatedAt": "2026-10-18T20:54:31Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.5.0",
+      "name": "LiNEA v2.5.0",
+      "publishedAt": "2026-10-15T22:54:41Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.5.0",
+      "body": "# 🚀 LiNEA v2.5.0 — Release Notes\n\n## Overview\n**LiNEA v2.5.0** is a major stable release introducing the **Country-Based Call Blocking System**, an overhaul of the incoming call audio pipeline and telecom logging, battery drain optimizations, native default dialer power exemption support, and missed call notification deduplication.\n\n---\n\n### What's New in v2.5.0\n\n#### 🌍 Country-Based Call Blocking System\n- **Comprehensive Country Filter**: Blacklist or whitelist international callers by country with strict \"Whitelist Only\" and \"Blacklist Only\" filtering modes.\n- **High-Precision Country Detection**: Powered by Google `libphonenumber` to accurately identify caller countries from E.164 and localized numbers, seamlessly disambiguating shared country codes (e.g., USA vs. Canada under `+1`, Russia vs. Kazakhstan under `+7`).\n- **Granular Exemptions**: Specific countries under a shared dialing code can be allowed even if the code itself is blocked.\n- **Domestic & Contact Bypass**: Contacts and calls originating from the device's domestic SIM country bypass blocking automatically to ensure critical calls are never missed.\n- **Management UI**: Dedicated settings interface with flag-based selectors, search integration, and a status dashboard on the main Blocking Screen.\n\n---\n\n### Key Fixes & Optimizations in v2.5.0\n\n#### 🔊 Incoming Call Audio Pipeline & Ringer\n- **Audio Attributes & Stream**: Configured ringtone playback strictly with `USAGE_NOTIFICATION_RINGTONE` and `STREAM_RING`, properly requesting transient audio focus with ducking.\n- **Eliminated Silent Ringing**: Resolved volume key silencing race conditions and state desynchronization that previously caused incoming calls to ring silently.\n- **Vibration Synchronization**: Ensured vibration patterns synchronize cleanly with ringtone playback and immediately halt upon call answer, reject, or disconnect.\n\n#### 🔋 Battery Drain Elimination & Power Exemption\n- **Native Default Dialer Exemption**: Fully integrated Android's native `ROLE_DIALER` unrestricted battery usage exemption (`PowerExemptionManager.REASON_ROLE_DIALER`), eliminating redundant \"Background Execution ATTENTION\" setup warnings.\n- **NFC Radio Transmitter Scoping**: Removed continuous background reader mode polling from `MainActivity.onResume()`. Scoped NFC hardware polling strictly to `LineaBeamSheet` via `DisposableEffect`, eliminating continuous 2–3Hz radio transmitter pulsing.\n- **Sensor Hardware Leak Prevention**: Synchronously cancelled pending startup coroutines upon `stopListening()` in `CallGestureManager`, ensuring accelerometer and proximity sensors never remain active in the background after quick call termination.\n- **Proximity Sensor Power Rail Release**: Changed proximity wake lock release to drop immediately (`release(0)`) upon call disconnect, preventing the physical proximity sensor rail from holding power for up to 2 hours when placed face-down or pocketed.\n- **Worker Constraints**: Added `setRequiresDeviceIdle(true)` and `setRequiresBatteryNotLow(true)` to periodic call history maintenance work.\n\n#### 🔔 Missed Call Notification Deduplication\n- **Phone Number Digit Normalization**: Normalized digits so raw telecom handles and formatted numbers map to identical notification IDs.\n- **Suppression Window**: Added a 15-second deduplication suppression window in `CallNotificationManager` to prevent duplicate alerts.\n- **Broadcast Coordination**: Updated `MissedCallReceiver` to suppress redundant platform `ACTION_SHOW_MISSED_CALLS_NOTIFICATION` broadcasts when `InCallService` has already posted, while maintaining asynchronous contact lookup fallback.\n\n#### 📋 Telecom Logging & Call History\n- **Accurate Duration Tracking**: Computed call duration using elapsed monotonic connect time rather than wall-clock differences, preventing duration errors during screen-off sleep.\n- **Direction Classification**: Fixed direction assignment on call removal to ensure missed, incoming, and outgoing calls are categorized and persisted to Room without dropped records.\n\n---\n\n### Release Metadata\n- **versionCode**: `9`\n- **versionName**: `2.5.0`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.5.0-release.apk",
+          "label": null,
+          "size": 31221273,
+          "sizeLabel": "29.8 MB",
+          "downloadCount": 7,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.5.0/LiNEA-v2.5.0-release.apk",
+          "sha256": "61f2bc9845c4e847a260aae17a6513a146299f8ad63877846c635bd13306077c",
+          "updatedAt": "2026-10-15T22:54:40Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.5.0-beta",
+      "name": "v2.5.0-beta",
+      "publishedAt": "2026-10-10T21:17:47Z",
+      "prerelease": true,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.5.0-beta",
+      "body": "# LiNEA v2.5.0-beta Release Notes\n\n## Added\n- **Country-Based Call Blocking System**:\n  - **Country Blacklist / Whitelist**: Added a comprehensive country-based call filter with strict \"Whitelist Only\" and \"Blacklist Only\" modes.\n  - **High-Precision Country Detection**: Integrated Google's `libphonenumber` to accurately identify caller countries from incoming E.164 and localized numbers. Disambiguates shared calling codes seamlessly (e.g., distinguishing between USA and Canada under `+1`, or Russia and Kazakhstan under `+7`).\n  - **Granular Controls**: Specific countries under a shared dialing code can be whitelisted even if the entire code is blacklisted.\n  - **Contact & Domestic Exemptions**: Saved contacts and calls originating from the user's domestic SIM country bypass blocking automatically to ensure critical calls are never missed.\n  - **Management UI**: New dedicated \"Country Call Blocking\" settings interface with interactive flag-based selectors, search integration, and a status dashboard on the main Blocking Screen.\n  - **Safe Edge Case Handling**: Private, unknown, and withheld caller IDs bypass country checks to avoid false classifications, delegating to the existing unknown caller filter rules.\n\n---\n**Note:** If you find any errors or bugs, please let us know at ryn@disr.it\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.5.0-beta-release.apk",
+          "label": null,
+          "size": 31188437,
+          "sizeLabel": "29.7 MB",
+          "downloadCount": 1,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.5.0-beta/LiNEA-v2.5.0-beta-release.apk",
+          "sha256": "613e743ab295cf37854fec73e096271ea726ddd131e0314b8661b3497d122628",
+          "updatedAt": "2026-10-10T21:17:46Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.4.1",
+      "name": "LiNEA v2.4.1",
+      "publishedAt": "2026-09-29T19:15:01Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.4.1",
+      "body": "# 🚀 LiNEA v2.4.1 — Release Notes\n\n## Overview\n**LiNEA v2.4.1** is a critical patch release fixing the QR code scanner crash on physical devices, adding reliable hardware button call controls (volume/power silencing and power double-press to end call), and resolving 30+ application-wide bugs across telecom stability, security, and UI/UX.\n\n---\n\n### What's Fixed in v2.4.1\n\n#### 📸 QR Code Scanner — Physical Device Camera Crash & Blank Screen\n- **R8 / ProGuard Fix**: Added `-keep` rules for Google ML Kit component discovery, CameraX, and ZXing classes in `proguard-rules.pro`. Release builds with R8 minification were stripping ML Kit reflection, causing a `NullPointerException` crash when opening the QR scanner on physical devices.\n- **Real-Time Offline ZXing Fallback**: If ML Kit fails to initialize (stripped by R8, missing Google Play Services, or device-specific issues), the scanner seamlessly falls back to offline ZXing Y-plane luminance decoding — zero external service dependencies.\n- **OEM Lifecycle Fix**: Resolved blank camera frames on Samsung OneUI, Xiaomi HyperOS, and ColorOS caused by synthetic dialog window lifecycles by resolving the hosting `ComponentActivity` directly.\n- **3-Tier Camera Resolution Strategy**: Automatic fallback from 720p → CDD default → Preview-only to prevent `IllegalArgumentException` crashes across all camera hardware levels (`LEGACY`, `LIMITED`, `FULL`).\n- **Interactive Error UI**: Camera failures now show **\"Retry Camera\"** and **\"Scan Photo\"** buttons instead of a blank screen.\n\n#### 📞 Incoming Call Hardware Button Behavior\n- **Volume Up/Down → Silence**: Pressing either volume button during an incoming call immediately silences the ringtone. Grace period reduced from 2000ms to 600ms for near-instant responsiveness.\n- **Power Button → Silence**: A single power button press reliably silences the ringtone. Removed the proximity sensor gate that was blocking power button behavior when the phone was near the user's face or in a pocket.\n- **Power Button ×2 → End Call**: Two rapid power button presses (within 1 second) reject/terminate the call — works for incoming, outgoing, and active calls. Implemented via `ACTION_SCREEN_OFF` + `ACTION_SCREEN_ON` broadcast detection.\n\n#### 🔧 Full Application Audit & Multi-Phase Bug Fixes\n- **Telecom & In-Call**: Fixed double-dispose crash on rejected calls, audio route desync, SIM selection race condition, duration timer drift, and missing `FOREGROUND_SERVICE_PHONE_CALL` on Android 14+.\n- **Security & Vault**: Hardened biometric re-authentication, constant-time PIN comparison, and orphaned contact cleanup on deletion.\n- **UI/UX**: Eliminated scroll jank on Recent calls, fixed DTMF overlap, search highlight desync, corrupt backup/restore handling, and light theme contrast issues.\n\n### What's New in v2.4.1\n- Closed-app NFC mutual beam processing, tag detection diagnostics, and retry workflows.\n- \"Always Share\" mode and persistent digital card profile synchronization.\n- Dynamic app version display in Settings footer.\n\n> **⚠️ NFC Beaming is currently in the testing phase.** If you encounter any bugs or issues with NFC contact sharing, please report them to [ryn@disr.it](mailto:ryn@disr.it).\n\n---\n\n### Release Metadata\n- **versionCode**: `7`\n- **versionName**: `2.4.1`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.4.1-release.apk",
+          "label": null,
+          "size": 30872204,
+          "sizeLabel": "29.4 MB",
+          "downloadCount": 8,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.4.1/LiNEA-v2.4.1-release.apk",
+          "sha256": "dfcaa0e8ebd846c65ab2d00905acc2d6cb6d723d1230e6bd4615932ef3cc93cf",
+          "updatedAt": "2026-09-29T19:15:00Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.3.0",
+      "name": "LiNEA v2.3.0 — Bespoke Liquid QR Contact Sharing & Compact Quick-Copy",
+      "publishedAt": "2026-09-20T18:54:44Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.3.0",
+      "body": "# 🚀 LiNEA v2.3.0 — Release Notes\n\n## Overview\n**LiNEA v2.3.0** introduces bespoke liquid-capsule QR code contact sharing, an ultra-fast Google ML Kit scanner strictly filtered for LiNEA codes, one-tap number copying, and a compact 1-second hold-to-copy sheet for Recent call history.\n\n---\n\n### What's New in v2.3.0\n\n#### 📷 Bespoke Liquid-Capsule QR Code Contact Sharing\n- **Organic Liquid Matrix**: Designed an organic capsule matrix renderer where adjacent data modules fuse into continuous rounded capsules ($R = \\text{moduleSize} \\times 0.42$), eliminating harsh pixel squares.\n- **Squircle Finder Eyes & Monogram Badge**: Precision squircle finder eyes with vibrant gradient centers and a central contact initial badge protected by QR Level Q error correction (25% data recovery).\n- **5 Tactile Color Palettes**: Seamless transparent in-app previews and high-res export formats in Titanium Cyan, Emerald Mint, Cyber Amber, Neon Orchid, and Pure White.\n- **Fast Access**: One-tap QR generator directly accessible from the Contacts list, Contact Profile Dashboard, and Recent Call Details.\n\n#### 🔍 Strict LiNEA QR Code Scanner & Multi-Code Prioritization\n- **Strict LiNEA Filtering**: Camera preview and gallery photo import engine strictly decode authentic LiNEA QR codes (`linea://contact` and `linea://`), ignoring random QR codes (websites, Wi-Fi setups, generic barcodes, plain text).\n- **Multi-Code Prioritization**: When multiple QR codes are simultaneously visible in the camera frame or imported photo, the scanner isolates and detects only the LiNEA QR code.\n- **Informative Validation**: Imported photos without valid LiNEA QR codes provide clear feedback without crashing or false-triggering.\n- **Hardware Controls**: Tap-to-focus, flashlight torch toggle, and gallery photo picker with dual-pass ZXing fallback.\n\n#### 📋 Instant One-Tap Number Copying\n- **Decoded QR Card Copy Badge**: Added a prominent, frosted-glass `[ Copy ]` button to the decoded QR contact card alongside \"Scan Again\".\n- **Per-Row Tap-to-Copy**: Tapping any phone number row in the decoded card copies it immediately to the clipboard with haptic feedback and a toast notification.\n\n#### ⏱️ Recent Call Log 1-Second Hold-to-Copy Sheet\n- **1-Second Touch & Hold**: Holding any call log entry on the **Recent** page (both Feed and Session modes) for 1 second triggers an ultra-compact bottom sheet.\n- **Ultra-Compact Footprint**: Minimalist layout featuring the contact avatar and name horizontally aligned, followed by a sleek frosted-glass card displaying `PHONE NUMBER`, the full number, and a `[ ⎘ Copy ]` pill badge.\n- **Direct Clipboard Action**: Tapping anywhere on the card or badge copies the number to the clipboard and smoothly dismisses the sheet.\n- **Touch-Slop Safety**: Cancels hold detection if user is scrolling the list vertically or swiping horizontally for call-back / quick-action trays.\n\n---\n\n### Release Metadata\n- **versionCode**: `5`\n- **versionName**: `2.3.0`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.3.0.apk",
+          "label": null,
+          "size": 77260272,
+          "sizeLabel": "73.7 MB",
+          "downloadCount": 7,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.3.0/LiNEA-v2.3.0.apk",
+          "sha256": "7a038aef4254d7e1a45c78bbe855f94a4b1f987d4eff11c9df42ad85559a8c6b",
+          "updatedAt": "2026-09-20T18:54:44Z"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "label": null,
+          "size": 83,
+          "sizeLabel": "0.0 MB",
+          "downloadCount": 0,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.3.0/SHA256SUMS.txt",
+          "sha256": "1e8583fbfc4db4778a183f01eb27b5b40e9c289d79e40ef396f0e615424c1be6",
+          "updatedAt": "2026-09-20T18:54:03Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.2.0",
+      "name": "LiNEA v2.2.0 — Dual-SIM Architecture, Smart History Filters & Fiery Magma Easter Egg",
+      "publishedAt": "2026-09-13T23:27:50Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.2.0",
+      "body": "# 🚀 LiNEA v2.2.0 — Release Notes\n\n## Overview\n**LiNEA v2.2.0** brings enhanced dual-SIM management, smart call history filtering, critical telephony audio fixes, and a secret cinematic Easter Egg.\n\n---\n\n### What's New in v2.2.0\n\n#### 📱 Configurable SIM Selector Position (Middle vs Bottom)\n- **Floating Middle Dialog (Default)**: The \"Select Calling SIM\" overlay now floats gracefully in the center of the screen within a translucent frosted glass neumorphic card with backdrop blur and tap-outside dismissal.\n- **Traditional Bottom Sheet Option**: Users preferring a sliding sheet from the bottom can toggle it with a single tap in **Settings → Dual SIM Management**.\n- **Unified Across App**: Both the Cellular Dial Pad and Recent History call-backs honor this position preference reactively.\n\n#### 🔍 Recent Call History Smart Filters (Incoming & Outgoing)\n- Added dedicated `Incoming` and `Outgoing` filter chips to the Recent screen filter bar alongside `All` and `Missed`.\n- Filter logs instantly across daily grouped feeds and aggregated contact sessions without re-querying the database.\n\n#### 🔢 Dial Pad \"Always Ask\" Symbol & Settings Affinity\n- **Always Ask Symbol (`?`)**: Added a clean `?` icon in the dial pad top-bar SIM pill when \"Always Ask\" mode is enabled in Settings, preserving neumorphic layout integrity.\n- **Settings Affinity**: The dial pad strictly honors the user's configured default SIM (\"SIM 1 Only\", \"SIM 2 Only\", or \"Always Ask\") upon opening. In-dialer SIM switching is temporary and never inadvertently overwrites permanent settings.\n\n#### 📲 Dynamic Single-SIM UX Optimization\n- Devices with only one active SIM slot automatically hide the static \"SIM 2\" row under Dual SIM settings.\n- The dial pad SIM selector pill is omitted on single-SIM setups, cleanly routing calls through the active SIM.\n\n#### 🛡️ Telephony Audio & UI Fixes\n- **Bottom Sheet Dome Clipping**: Corrected `LineaShapes.extraLarge` from `CircleShape` to `RoundedCornerShape(28.dp)`, eliminating severe 50% dome clipping on sheet headers and buttons across `SimSelectSheet`, `AddBlockSheet`, `AddEditCallRuleSheet`, and `CallbackReminderSheet`.\n- **Incoming Call Ringer Silencing**: Prevented Telecom's internal `onSilenceRinger()` setup invocation and early `VOLUME_CHANGED_ACTION` broadcasts from prematurely silencing the incoming ringtone before playback starts.\n- **History Call-Back Dual-SIM Selection**: Integrated `SimSelectSheet` prompt when initiating call-backs from Recent call logs with dual SIM and \"Always Ask\" enabled.\n- **Dial Pad SIM 2 Only Default**: Resolved an issue where selecting \"SIM 2 Only\" in Settings still caused the dial pad to default to SIM 1.\n\n#### 🔥 Secret Easter Egg: Animated Fiery Magma Call Button\n- **3-Second Hold Trigger**: Tap and hold the main Call button on the Cellular Dial Pad for 3 seconds to detonate an explosive slow-motion blast with fire shockwaves, embers, and shattered button shards.\n- **Slow-Motion Healing / Rearranging**: Following peak dispersion, shards magnetically rewind and reassemble into a permanent **Fiery Magma Style**.\n- **Custom-Designed Animated Flame Icon**: Hand-crafted fire handset featuring 3-layered roaring flame plumes, dragon-wing spine crests, rocket exhaust jets, and an incandescent white-gold core line with real-time fluttering flame tips (`flameWobble`) and floating ember sparks.\n- **Reversible & Persistent**: Saved in DataStore across app restarts; holding for 3 seconds again reverses the button back to default Titanium Blue.\n- **Zero In-App Mentions**: Kept entirely secret; normal short taps (<400ms) continue to place calls immediately.\n\n---\n\n### Release Metadata\n- **versionCode**: `4`\n- **versionName**: `2.2.0`\n- **Min SDK**: `Android 11 (API 30)`\n- **Target SDK**: `Android 17 (API 37)`\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.2.0.apk",
+          "label": null,
+          "size": 51202034,
+          "sizeLabel": "48.8 MB",
+          "downloadCount": 6,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.2.0/LiNEA-v2.2.0.apk",
+          "sha256": "560a94c7ffe3f354c8100f4d2d0be9fc1e00d84c2ba51b9ed7c3ec2fa58a5e85",
+          "updatedAt": "2026-09-13T23:27:50Z"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "label": null,
+          "size": 83,
+          "sizeLabel": "0.0 MB",
+          "downloadCount": 0,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.2.0/SHA256SUMS.txt",
+          "sha256": "089e83660e20b45143869b962e5892df0e67a8ecc394f63316d7e98d5085f6d0",
+          "updatedAt": "2026-09-13T23:27:34Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.1.0",
+      "name": "LiNEA v2.1.0 — Tactile Neumorphism (Soft UI) & Hardware Controls",
+      "publishedAt": "2026-09-11T14:13:53Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.1.0",
+      "body": "## 🚀 LiNEA v2.1.0 — Tactile Neumorphism (Soft UI) & Hardware Controls\n\n### What's New in v2.1.0\n\n#### 🎛️ Tactile Neumorphism (Soft UI) Architecture\n• Replaced legacy UI styling with an architectural Soft UI Neumorphic design system.\n• Engineered dual-shadow lighting engine (`Modifier.neumorphic()`, `NeumorphicCard`, `NeumorphicWell`, `NeumorphicButton`, `NeumorphicIconButton`) utilizing opposing top-left specular highlight and bottom-right ambient drop shadows via Android native canvas `Paint.setShadowLayer`.\n• Dialpad digit keys depress physically into sunken wells on tap with tactile spring dynamics (`ScaleCompressSpring`) and micro-haptic confirmation.\n• In-call controls depress into illuminated debossed wells with active status rings, balanced in an ergonomic 3x2 grid positioned in the bottom thumb zone.\n• Transparent in-call keypad overlay with tap-outside dismiss gesture.\n• Replaced floating navigation bar with extruded pill container and sunken debossed active tab well.\n• Restyled search bars, filter chips, call history tiles, contact cards, and bottom sheets to physical tactile surfaces.\n\n#### 🔘 Hardware Button Call Control & Silencing\n• **Volume Up / Down Silencing**: Pressing either Volume Up or Volume Down once during an incoming call immediately silences the ringtone and vibration without rejecting or ending the call, allowing it to continue ringing normally.\n• **Double-Press Power Button to End Calls**: Rapidly pressing the hardware Power button twice terminates the current call across all states: incoming ringing (rejects), outgoing dialing (disconnects), and active/received conversations (disconnects), confirmed with a crisp haptic pulse.\n• Protected with hardware debounce filtering (120ms threshold) and active call lifecycle binding.\n\n#### 📋 Call History Quick-Action Swipe Drawer\n• Swipe left on any call log entry to smoothly reveal a stationary action drawer featuring Call, SMS, Add/View Contact, and Block action buttons with friction damping and tap-outside dismiss.\n• Automatic call log deduplication by phone number, call type, and timestamp clustering with instant state synchronization.\n• High-visibility red badge and red text indicators for the most recent unreturned missed call entries.\n\n#### 📇 Native Contact Sheet & Reactive Add-Contact Drawer\n• Seamlessly integrates Android's native `ContactsContract` view and insert intents.\n• Unknown callers in history can be saved immediately through a native bottom drawer without leaving the dialer.\n\n#### 🛡️ Sovereign Telephony & Cleanup\n• Completely removed call recording, auto-record triggers, and accessibility services due to AOSP `AudioPolicyService` audio stream isolation on Android 10+.\n• Removed real-time audio waving visualizer and background level polling to optimize in-call UI performance and eliminate mic contention.\n• Resolved Compose nested column measurement expansion bug that caused the About screen hero card to balloon vertically.\n• Fixed phone number sanitization and E.164 normalization across contact lookups, dialer actions, and system intent launches.\n\n---\n\n### Installation\n\nDownload `LiNEA-v2.1.0.apk` and sideload it on your Android 11+ device.\nEnable \"Install from unknown sources\" in Settings → Security if required.\n\n---\n\n`versionCode: 3` | `versionName: 2.1.0` | `Min SDK: Android 11 (API 30)` | `Target SDK: Android 17 (API 37)`\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.1.0.apk",
+          "label": null,
+          "size": 51120118,
+          "sizeLabel": "48.8 MB",
+          "downloadCount": 5,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.1.0/LiNEA-v2.1.0.apk",
+          "sha256": "39f8d1d4634ad8e77767c1a6394de0d0326e729c3e891dcfc1731ea48cc81f0c",
+          "updatedAt": "2026-09-11T14:13:53Z"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "label": null,
+          "size": 83,
+          "sizeLabel": "0.0 MB",
+          "downloadCount": 1,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.1.0/SHA256SUMS.txt",
+          "sha256": "d02fb90ed20f5e7cce76fe7f938a3c972ef51fa8e6a90816d399d419de4a10d0",
+          "updatedAt": "2026-09-11T14:13:40Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v2.0.0",
+      "name": "LiNEA v2.0.0 — Next-Gen Glassmorphism Dialer",
+      "publishedAt": "2026-09-09T14:10:33Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v2.0.0",
+      "body": "## 🚀 LiNEA v2.0.0 — Major Feature Release\n\n### What's New in v2.0.0\n\n#### 🎵 Live Audio Waveform Visualizer\n- 32-bar multi-harmonic fluid liquid glass waveform on active call screen\n- Dynamic state-aware: Active (cyan), Muted (amber flatline), Hold (pulsing), Recording (crimson)\n\n#### 🖼️ Full-Screen Frosted Contact Posters\n- Full-bleed blurred contact photo backgrounds with breathing scale animation\n- Native LRU-cached photo rendering — zero third-party dependencies\n- Generative monogram watermark fallback for contacts without photos\n\n#### 📳 Haptic Audio Dialpad Profiles\n- 4 selectable dialpad profiles in Settings:\n  - **Titanium Glass** (Default) — crisp micro-clicks + DTMF\n  - **Mechanical Relay** — heavy tactile relay thump\n  - **Stealth** — near-silent micro-vibrations\n  - **Classic** — standard Android dialpad\n\n#### 🤫 Flip to Silence & Proximity Wave Gestures\n- Hardware sensor-based gesture recognition (accelerometer + proximity)\n- User-toggleable (off by default)\n\n#### 💬 Quick Decline Glass Action Sheet\n- One-tap decline with contextual message options (\"Can't talk right now\", custom SMS)\n\n#### 🌍 International Time Zone Preview & Country Detection\n- Live clock + UTC offset displayed on Dialpad for the entered country code\n- Country flag, name, and carrier region shown on incoming Caller ID screen\n\n#### 🎨 Next-Gen Glassmorphism Call UI\n- Full redesign of InCallScreen and IncomingCallScreen\n- Frosted glass cards, animated gradients, TactileCallAction buttons\n- Proximity-aware display dimming\n\n---\n\n### Installation\nDownload **LiNEA-v2.0.0.apk** and sideload it on your Android 11+ device.\nEnable *Install from unknown sources* in Settings → Security before installing.\n\n---\n\n**versionCode:** 2 | **versionName:** 2.0.0 | **Min SDK:** Android 11 (API 30) | **Target SDK:** Android 15 (API 35)",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v2.0.0.apk",
+          "label": "LiNEA-v2.0.0.apk (Release APK)",
+          "size": 51070962,
+          "sizeLabel": "48.7 MB",
+          "downloadCount": 11,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.0.0/LiNEA-v2.0.0.apk",
+          "sha256": "344283be07b69a81508063eb8b60e6f9fcb96a151aeabfb7d5f20e242bd35027",
+          "updatedAt": "2026-09-09T14:10:32Z"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "label": "SHA256SUMS.txt (Checksums)",
+          "size": 83,
+          "sizeLabel": "0.0 MB",
+          "downloadCount": 0,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v2.0.0/SHA256SUMS.txt",
+          "sha256": "a171487c5ba3feb0b0a222ddc017677448db135049a77bbc98baa5d51efb27ce",
+          "updatedAt": "2026-09-09T14:13:05Z"
+        }
+      ]
+    },
+    {
+      "tagName": "v1.0.0",
+      "name": "LiNEA v1.0.0",
+      "publishedAt": "2026-09-09T11:58:09Z",
+      "prerelease": false,
+      "htmlUrl": "https://github.com/MdSagorMunshi/Linea/releases/tag/v1.0.0",
+      "body": "# LiNEA v1.0.0 — Official Initial Release\n\n**LiNEA** is a pure Android 17 (API 37) Telecom Jetpack Compose phone application with a Titanium Liquid Glass aesthetic and an encrypted local-first core.\n\n---\n\n### Highlights & Features\n\n- **Collapsible Gesture-Driven Navigation**: Interactive bottom navigation bar transitioning smoothly between a compact ambient indicator and a full glass navigation pill with spring physics.\n- **Custom Embedded Ringtone**: Built-in Linea audio ringtone with dedicated ringtone settings and system fallback preferences.\n- **Titanium Liquid Glass UI**: Sleek dark graphite aesthetic, edge-to-edge system bar integration, real-time haptics, and fluid micro-animations.\n- **Encrypted Private Safe**: Secure, PIN-protected hidden contacts and communication vault.\n- **Advanced Call Management & Telecom**: System default dialer integration, direct dual-SIM carrier selection, and comprehensive in-call notification controls.\n- **Call Rules & Filtering**: Granular rule engine with wildcard matching, spam blocking, and VIP bypass.\n- **Diagnostics & Network Telemetry**: Live cellular signal metrics, audio route diagnostics, and system readiness monitors.\n- **Call Recording Engine**: Local call audio recording with visual playback waveforms and metadata management.\n\n---\n\n### Verification & Checksums\n\n| Asset | Size | SHA-256 Checksum |\n|---|---|---|\n| `LiNEA-v1.0.0.apk` | 49 MB | `ff5f25d73f62e43301b254c3dc850b9860f79d28f6ef88ab0f9b16c191c911bb` |\n\nSigned with official release keystore (`linea-release-key.jks`, alias `linea-ryan`).\nVerified via APK Signature Scheme v2.\n",
+      "author": "MdSagorMunshi",
+      "assets": [
+        {
+          "name": "LiNEA-v1.0.0.apk",
+          "label": null,
+          "size": 50989042,
+          "sizeLabel": "48.6 MB",
+          "downloadCount": 5,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v1.0.0/LiNEA-v1.0.0.apk",
+          "sha256": "ff5f25d73f62e43301b254c3dc850b9860f79d28f6ef88ab0f9b16c191c911bb",
+          "updatedAt": "2026-09-09T11:58:08Z"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "label": null,
+          "size": 83,
+          "sizeLabel": "0.0 MB",
+          "downloadCount": 0,
+          "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/download/v1.0.0/SHA256SUMS.txt",
+          "sha256": "9f2c0d8af4cd4cde59bf58da40fec8d717e69161ee3743d41243ac5f55f18a03",
+          "updatedAt": "2026-09-09T11:57:57Z"
+        }
+      ]
+    }
+  ]
+}

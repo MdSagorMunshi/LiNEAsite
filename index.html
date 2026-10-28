@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0B0D10" />
+    <meta name="color-scheme" content="dark" />
+    <title>LiNEA — Sovereign Android Dialer</title>
+    <meta
+      name="description"
+      content="LiNEA — the sovereign, privacy-preserving cellular dialer for Android 17 (API 37). Native telecom framework, 100% on-device, zero cloud dependency. Direct APK downloads, checksums and GitHub releases."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="LiNEA — Sovereign Android Dialer" />
+    <meta property="og:url" content="/" />
+    <meta
+      property="og:description"
+      content="Industrial-grade Android 17 dialer. Zero cloud. Zero telemetry. Direct APK downloads & GitHub releases."
+    />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LiNEA — Sovereign Android Dialer" />
+    <meta
+      name="twitter:description"
+      content="Industrial-grade Android 17 dialer. Zero cloud. Zero telemetry. Direct APK downloads & GitHub releases."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "LiNEA",
+        "description": "The sovereign, privacy-preserving cellular dialer for Android 17 (API 37). Native telecom framework, T9 search, hardware-backed encryption, zero cloud dependency.",
+        "url": "https://github.com/MdSagorMunshi/Linea",
+        "downloadUrl": "https://github.com/MdSagorMunshi/Linea/releases/latest",
+        "operatingSystem": "Android 11+",
+        "applicationCategory": "CommunicationApplication",
+        "applicationSubCategory": "Dialer",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "Ryan Shelby",
+          "email": "ryn@disr.it"
+        },
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is LiNEA free and open source?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. LiNEA is free forever, licensed under Apache 2.0, with source code published on GitHub. There are no ads, subscriptions, in-app purchases or paid tiers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Android versions does LiNEA support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "LiNEA targets Android 17 (API 37) and runs on Android 11 and newer. It is built directly on the native Android telecom framework, so no third-party call libraries are involved."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does LiNEA send any data to the cloud?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. LiNEA is 100% on-device with zero cloud dependency and zero telemetry. Contacts, call logs and settings never leave the phone."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install LiNEA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Download the APK, allow install from unknown apps for your file manager, open the APK, then set LiNEA as the default dialer. Advanced users can sideload with ADB: adb install -r LiNEA.apk, then adb shell telecom set-default-dialer com.ryanshelby.linea."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I verify the APK before installing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every release publishes SHA-256 checksums for all APK assets. Compare the checksum of your downloaded file against the value shown in the Downloads section, or use the built-in verification terminal which generates the exact certutil/sha256sum command."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the downloads come from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "All builds are attached to GitHub Releases in the MdSagorMunshi/Linea repository. This site lists every asset of every tag directly and stays in sync automatically."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

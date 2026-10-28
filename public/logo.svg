@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" width="100%" height="100%">
+  <defs>
+    <!-- Background Midnight Obsidian -->
+    <linearGradient id="logo-mark-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#080C14" />
+      <stop offset="100%" stop-color="#020408" />
+    </linearGradient>
+
+    <!-- Specular Rim Gradient -->
+    <linearGradient id="logo-mark-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#818CF8" stop-opacity="0.6" />
+      <stop offset="75%" stop-color="#0EA5E9" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#D4A359" stop-opacity="0.85" />
+    </linearGradient>
+
+    <!-- Ambient Liquid Sapphire Glow -->
+    <radialGradient id="logo-mark-glow" cx="30%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.45" />
+      <stop offset="45%" stop-color="#0284C7" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Handset Surface Gradient -->
+    <linearGradient id="logo-mark-phone" x1="20%" y1="10%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#E0F2FE" />
+      <stop offset="100%" stop-color="#94A3B8" />
+    </linearGradient>
+
+    <!-- Signal Arc Gradient -->
+    <linearGradient id="logo-mark-signal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Text Gradient -->
+    <linearGradient id="logo-text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E0F2FE" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Mark (48x48 centered inside 56x56) -->
+  <g transform="translate(4, 4)">
+    <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#logo-mark-bg)" />
+    <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#logo-mark-glow)" />
+    
+    <!-- Glass Highlight -->
+    <path d="M 3 13 C 3 7 7 3 13 3 L 35 3 C 41 3 45 7 45 13 C 45 15 37 19 24 19 C 11 19 3 15 3 13 Z" fill="#FFFFFF" fill-opacity="0.06" />
+
+    <!-- Outer Rim -->
+    <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="none" stroke="url(#logo-mark-rim)" stroke-width="1.4" />
+    <rect x="2.6" y="2.6" width="42.8" height="42.8" rx="9.9" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="0.7" />
+
+    <!-- Scaled Handset (1.5x) -->
+    <g transform="translate(2.5, 2.5) scale(1.4)">
+      <path d="M10.8 8.8 C10.2 8.2 9.2 8.2 8.5 8.8 L7.4 9.8 C6.8 10.3 6.6 11.1 6.7 11.9 C7.2 14.4 8.9 18.0 12.1 21.2 C15.3 24.4 18.9 26.1 21.4 26.6 C22.2 26.7 23.0 26.5 23.5 25.9 L24.5 24.8 C25.1 24.1 25.1 23.1 24.5 22.5 L22.1 20.1 C21.5 19.5 20.5 19.5 19.8 20.1 L19.1 20.7 C18.7 21.0 18.1 21.1 17.6 20.7 C16.2 19.7 14.3 17.8 13.3 16.4 C12.9 15.9 13.0 15.3 13.3 14.9 L13.9 14.2 C14.5 13.5 14.5 12.5 13.9 11.9 Z" 
+            fill="url(#logo-mark-phone)" />
+      <circle cx="9.8" cy="10.2" r="1.1" fill="#D4A359" />
+      <path d="M 18.7 9.6 A 7.5 7.5 0 0 1 16.3 17.2" fill="none" stroke="url(#logo-mark-signal)" stroke-width="1.8" stroke-linecap="round" />
+      <path d="M 22.8 7.4 A 12.0 12.0 0 0 1 18.4 21.3" fill="none" stroke="url(#logo-mark-signal)" stroke-width="1.8" stroke-linecap="round" stroke-opacity="0.78" />
+    </g>
+  </g>
+
+  <!-- Typography Lockup -->
+  <!-- Brand Wordmark: LiNEA -->
+  <text x="64" y="33" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="700" letter-spacing="-0.03em" fill="url(#logo-text-grad)">LiNEA</text>
+  
+  <!-- Corporate Sub-label -->
+  <text x="65" y="46" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.18em" fill="#38BDF8">SOVEREIGN TELECOM</text>
+
+  <!-- Verified Pill Badge -->
+  <g transform="translate(150, 16)">
+    <rect width="74" height="18" rx="9" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8" />
+    <circle cx="9" cy="9" r="2.5" fill="#38BDF8" />
+    <text x="16" y="12.5" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" letter-spacing="0.12em" fill="#E0F2FE">v2.7.0</text>
+  </g>
+</svg>
